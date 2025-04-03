@@ -95,7 +95,8 @@ else:
     print("\nSkipping Chroma DB creation due to missing embeddings or documents.")
 
 # 10: Query Your Vector Store
-if db: # Only query if the database was created
+db = None # Initialize db variable
+if embeddings and final_documents: # Only query if we have embeddings and documents
     query = "What did Brutus say about Caesar?" # Example query
     print(f"\nPerforming similarity search for: '{query}'")
 
