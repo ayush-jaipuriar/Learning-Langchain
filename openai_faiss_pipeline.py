@@ -26,16 +26,23 @@ else:
 
 
 # 2. Load Your Text Data
-# Ensure a file named 'speech.txt' exists in the same directory
+# Ensure a file named 'customer_data.csv' exists in the same directory
 # For demonstration, let's create a dummy file if it doesn't exist
-SPEECH_FILE_PATH = "speech.txt"
+SPEECH_FILE_PATH = "customer_data.csv"
 if not os.path.exists(SPEECH_FILE_PATH):
     print(f"\n'{SPEECH_FILE_PATH}' not found. Creating a dummy file.")
     with open(SPEECH_FILE_PATH, "w") as f:
-        f.write("This is the first sentence of the speech.\n")
-        f.write("This speech talks about the importance of vector databases.\n")
-        f.write("The speaker emphasizes how embeddings help in similarity search.\n")
-        f.write("Finally, the speech concludes with future directions.\n")
+        f.write("Name,Phone,Address,Interest,Notes\n")
+        f.write("Alice Smith,555-0101,123 Oak St Anytown,automobile insurance,Interested in a new policy for her sedan.\n")
+        f.write("Bob Johnson,555-0102,456 Maple Ave Springfield,car financing,Looking for loan options for a used vehicle.\n")
+        f.write("Charlie Brown,555-0103,789 Pine Ln Gotham,vehicle maintenance,\"Needs schedule for regular car check-ups, oil change.\"\n")
+        f.write("Diana Prince,555-0104,101 Birch Rd Metropolis,motorcycle gear,Looking for helmets and jackets.\n")
+        f.write("Ethan Hunt,555-0105,202 Cedar Blvd Star City,auto parts,\"Needs new tires for his truck, specifically all-terrain.\"\n")
+        f.write("Fiona Glenanne,555-0106,303 Elm St Central City,automobile repair,Complaining about engine noise in her convertible car.\n")
+        f.write("George Costanza,555-0107,404 Spruce St Smallville,classic cars,Owns a vintage automobile, looking for restoration experts.\n")
+        f.write("Hannah Abbott,555-0108,505 Willow Way Riverdale,electric vehicles,Considering purchase of an EV, asking about charging infrastructure.\n")
+        f.write("Ian Malcolm,555-0109,606 Redwood Dr Sunnydale,car detailing,Wants premium cleaning service for his luxury automobile.\n")
+        f.write("Jane Doe,555-0110,707 Aspen Ct Fairview,driving lessons,Beginner driver looking for local instructors.\n")
 
 # Point to your text file
 loader = TextLoader(SPEECH_FILE_PATH)
@@ -46,7 +53,8 @@ print(f"\nLoaded the document '{SPEECH_FILE_PATH}'. It has {len(documents)} part
 
 # 3. Split the Document into Chunks
 # Initialize the splitter
-text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=30)
+# Use a smaller chunk size and overlap for better granularity with CSV-like data
+text_splitter = CharacterTextSplitter(chunk_size=200, chunk_overlap=50, separator="\n")
 # Split the loaded document
 docs = text_splitter.split_documents(documents)
 
@@ -71,7 +79,18 @@ try:
     # --- Phase 3: Querying Your Data ---
 
     # 6. Basic Similarity Search
-    query = "What is the speech about?"
+    """
+    Example Queries and Expected Matches:
+    - 'Who needs parts for a motorcycle?'     → Matches: Diana, Xavier
+    - 'Customers interested in SUV'           → Matches: Bob, Quinn, Yara
+    - 'Looking for truck accessories'         → Matches: Ethan, Sam
+    - 'Who asked about insurance?'            → Matches: Alice, Diana, Wendy
+    - 'Interest in vintage vehicles'          → Matches: George, Xavier
+    - 'Needs repairs'                         → Matches: Fiona, Laura
+    - 'Alternative to car ownership'          → Matches: Ursula
+    - 'Which customers are from Scranton?'    → Matches: Michael, Oscar
+    """
+    query = "Which customers are from Scranton?"
     print(f"\nQuerying the vector store with: '{query}' (using OpenAI for query embedding)")
     results = db.similarity_search(query)
     print(f"Found {len(results)} relevant chunks.")
