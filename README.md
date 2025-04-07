@@ -68,6 +68,43 @@ Use LangSmith dashboard to monitor your application:
 1. Log in to [LangSmith](https://smith.langchain.com)
 2. View traces, debug issues, and analyze performance
 
+## OpenAI Embeddings and FAISS Example
+
+This project includes an example script `openai_faiss_pipeline.py` that demonstrates how to:
+
+1.  **Load Data:** Reads text data from a file (currently `customer_data.csv`, containing synthetic customer information).
+2.  **Split Data:** Uses `CharacterTextSplitter` to break the loaded text into smaller chunks suitable for embedding.
+3.  **Generate Embeddings:** Utilizes `OpenAIEmbeddings` to convert text chunks into vector embeddings using OpenAI's API.
+4.  **Build Vector Store:** Creates a `FAISS` vector store from the documents and their embeddings, allowing for efficient similarity searches.
+5.  **Query Data:** Shows examples of querying the vector store using various methods (`similarity_search`, `as_retriever`, `similarity_search_with_score`, `similarity_search_by_vector`).
+6.  **Save/Load Index:** Demonstrates how to save the created FAISS index locally and load it back for later use.
+
+### Running the Example
+
+1.  Ensure you have installed all dependencies:
+    ```bash
+    pip install -r requirements.txt
+    ```
+2.  Set your OpenAI API key as an environment variable:
+    ```bash
+    # Windows (Command Prompt)
+    set OPENAI_API_KEY=your_api_key_here
+    
+    # Windows (PowerShell)
+    $env:OPENAI_API_KEY="your_api_key_here"
+    
+    # macOS/Linux
+    export OPENAI_API_KEY=your_api_key_here
+    ```
+    *Alternatively, manage keys using a `.env` file and the `python-dotenv` package if preferred.*
+
+3.  Run the script:
+    ```bash
+    python openai_faiss_pipeline.py
+    ```
+
+    The script will process `customer_data.csv` (creating a dummy file if it doesn't exist), build the FAISS index, perform sample queries, and save the index to the `faiss_index_openai` folder.
+
 ## Next Steps
 
 1. Explore LangChain components:
