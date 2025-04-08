@@ -6,7 +6,7 @@ from langchain_openai import OpenAIEmbeddings, ChatOpenAI
 from langchain_community.vectorstores import FAISS
 from langchain_core.prompts import ChatPromptTemplate
 from langchain.chains.combine_documents import create_stuff_documents_chain
-from langchain.chains import create_retrieval_chain
+from langchain.chains.retrieval import create_retrieval_chain
 import time # To measure time taken
 
 # --- Configuration ---
@@ -30,7 +30,7 @@ def main():
 
     # --- Initialize OpenAI Components ---
     embeddings = OpenAIEmbeddings()
-    llm = ChatOpenAI(model="gpt-3.5-turbo") # Using a cost-effective model
+    llm = ChatOpenAI(model="gpt-4o-mini") # Using a cost-effective model
     print(f"✅ Initialized OpenAI Embeddings and Chat Model ({llm.model_name}).")
 
 

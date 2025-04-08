@@ -17,4 +17,7 @@ arxiv>=1.4.7
 pymupdf>=1.23.8
 chromadb>=0.4.24
 faiss-cpu
-tiktoken 
+tiktoken
+# Added for Google Vertex AI Integration
+langchain-google-vertexai>=0.1.0
+google-cloud-aiplatform>=1.38.1 
