@@ -1,0 +1,6 @@
+langchain
+langchain-core
+langchain-google-vertexai
+langgraph
+python-dotenv
+google-cloud-aiplatform # For Vertex AI 
