@@ -1,0 +1,10 @@
+langchain
+langchain-openai
+neo4j
+duckdb
+pydantic
+fastapi
+uvicorn
+python-dotenv
+google-genai
+

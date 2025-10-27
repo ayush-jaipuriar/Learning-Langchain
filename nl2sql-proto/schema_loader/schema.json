@@ -1,0 +1,17 @@
+{
+  "dataset": "local_demo",
+  "table": {
+    "name": "customers",
+    "fqdn": "local_demo.customers",
+    "csv_path": "../data/customers.csv",
+    "columns": [
+      {"name": "id", "data_type": "INTEGER", "description": "Primary key"},
+      {"name": "name", "data_type": "TEXT", "description": "Full name", "aliases": ["customer name"]},
+      {"name": "email", "data_type": "TEXT", "description": "Email address"},
+      {"name": "city", "data_type": "TEXT", "description": "City of residence", "aliases": ["location", "town"]},
+      {"name": "created_at", "data_type": "TIMESTAMP", "description": "Account creation time", "aliases": ["signup time"]},
+      {"name": "spend", "data_type": "DECIMAL(18,2)", "description": "Total spend in currency"}
+    ]
+  }
+}
+
