@@ -50,6 +50,7 @@ project/
 - LangSmith monitoring and debugging
 - LangServe deployment capabilities
 - OpenAI API integration
+- Vertex AI-only LangGraph chatbot (SuperBot) demonstrating reducers and streaming
 
 ## Development
 
@@ -113,3 +114,17 @@ This project includes an example script `openai_faiss_pipeline.py` that demonstr
    - Output Parsers
 2. Build sample applications
 3. Deploy with LangServe 
+
+## SuperBot Vertex LangGraph Chatbot
+
+1. Copy `configs/superbot.env.example` to `.env` and populate your `GCP_PROJECT_ID`, `GCP_LOCATION`, and preferred `VERTEX_MODEL` (ADC authentication is required; run `gcloud auth application-default login`).
+2. Install dependencies if you have not already done so: `pip install -r requirements.txt`.
+3. Run a one-shot conversation from the terminal:
+   ```bash
+   python super_bot.py --prompt "Hello SuperBot!"
+   ```
+4. Explore streaming behavior:
+   ```bash
+   python super_bot.py --mode stream --stream-mode values --prompt "Explain reducer semantics"
+   ```
+5. Open `notebooks/chatbot.ipynb` for a guided walkthrough covering state schema, graph wiring, invoke, and streaming modes.
